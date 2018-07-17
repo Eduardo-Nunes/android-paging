@@ -15,10 +15,6 @@ import com.nunes.eduardo.paging.model.RepoSearchResult
  */
 class SearchRepositoriesViewModel(private val repository: GithubRepository) : ViewModel() {
 
-    companion object {
-        private const val VISIBLE_THRESHOLD = 5
-    }
-
     private val queryLiveData = MutableLiveData<String>()
     private val repoResult: LiveData<RepoSearchResult> = Transformations.map(queryLiveData) {
         repository.search(it)
@@ -32,15 +28,6 @@ class SearchRepositoriesViewModel(private val repository: GithubRepository) : Vi
      */
     fun searchRepo(queryString: String) {
         queryLiveData.postValue(queryString)
-    }
-
-    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
-        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
-            val immutableQuery = lastQueryValue()
-            if (immutableQuery != null) {
-                repository.requestMore(immutableQuery)
-            }
-        }
     }
 
     /**
