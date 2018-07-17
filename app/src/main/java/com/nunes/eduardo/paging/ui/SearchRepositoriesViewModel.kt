@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.arch.paging.PagedList
 import com.nunes.eduardo.paging.data.GithubRepository
 import com.nunes.eduardo.paging.model.Repo
 import com.nunes.eduardo.paging.model.RepoSearchResult
@@ -23,7 +24,7 @@ class SearchRepositoriesViewModel(private val repository: GithubRepository) : Vi
         repository.search(it)
     }
 
-    val repos: LiveData<List<Repo>> = Transformations.switchMap(repoResult) { it.data }
+    val repos: LiveData<PagedList<Repo>> = Transformations.switchMap(repoResult) { it.data }
     val networkErrors: LiveData<String> = Transformations.switchMap(repoResult) { it.networkErrors }
 
     /**
