@@ -28,9 +28,11 @@
         android:paddingVertical="@dimen/row_item_margin_vertical"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/repo_description_size"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repo_name"
+        tools:visibility="visible"
         tools:ignore="UnusedAttribute"
         tools:text="A collection of samples to discuss and showcase different architectural tools and patterns for Android apps."/>
 
@@ -42,8 +44,10 @@
         android:paddingVertical="@dimen/row_item_margin_vertical"
         android:text="@string/language"
         android:textSize="@dimen/repo_description_size"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repo_description"
+        tools:visibility="visible"
         tools:ignore="RtlCompat"/>
 
     <ImageView

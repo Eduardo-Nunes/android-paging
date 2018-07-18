@@ -27,7 +27,7 @@ class SearchRepositoriesViewModel(private val repository: GithubRepository) : Vi
      * Search a repository based on a query string.
      */
     fun searchRepo(queryString: String) {
-        queryLiveData.postValue(queryString)
+        queryLiveData.value = queryString
     }
 
     /**

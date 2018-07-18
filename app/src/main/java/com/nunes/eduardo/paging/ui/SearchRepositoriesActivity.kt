@@ -6,15 +6,13 @@ import android.arch.paging.PagedList
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import com.nunes.eduardo.paging.R
 import com.nunes.eduardo.paging.Injection
+import com.nunes.eduardo.paging.R
 import com.nunes.eduardo.paging.model.Repo
 import kotlinx.android.synthetic.main.activity_search_repositories.*
 
