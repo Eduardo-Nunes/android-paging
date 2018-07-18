@@ -50,10 +50,10 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         name.text = repo.fullName
         stars.text = repo.stars.toString()
         forks.text = repo.forks.toString()
-        description.visibility = VISIBLE
 
         repo.description?.let {
             description.text = it
+            description.visibility = VISIBLE
         }
 
         repo.language?.let {
