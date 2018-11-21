@@ -16,11 +16,26 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            // Run code coverage reports by default on debug builds.
+            testCoverageEnabled = true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+    // Gradle automatically adds 'android.test.runner' as a dependency.
+    // see the docs https://developer.android.com/training/testing/set-up-project#junit-based-libs
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
 }
 
 dependencies {
@@ -44,8 +59,28 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
 
-    // testing
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "com.android.support.test:runner:$runnerVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+//    // testing
+//    testImplementation "junit:junit:$junitVersion"
+
+    // Core library
+    androidTestImplementation "androidx.test:core:$testingXCoreVersion"
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation "androidx.test:runner:$runnerVersion"
+    androidTestImplementation "androidx.test:rules:$rulesVersion"
+
+    // Assertions
+    androidTestImplementation "androidx.test.ext:junit:$testingXCoreVersion"
+    androidTestImplementation "androidx.test.ext:truth:$testingXCoreVersion"
+    androidTestImplementation "com.google.truth:truth:$googleTruthVersion"
+
+    // Espresso dependencies
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-accessibility:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-web:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+
 }
