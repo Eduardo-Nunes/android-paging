@@ -35,10 +35,10 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun bindItem(repo: Repo?) {
-        repo?.let(::showItemData) ?: run(::showItemPlaceholder)
+        repo?.let(::showItemData) ?: showItemPlaceholder()
     }
 
-    private val showItemPlaceholder = {
+    private fun showItemPlaceholder() {
         val resources = itemView.resources
         name.text = resources.getString(R.string.loading)
         stars.text = resources.getString(R.string.unknown)
