@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
+import android.support.test.espresso.idling.CountingIdlingResource
 import com.nunes.eduardo.paging.data.GithubRepository
 import com.nunes.eduardo.paging.model.Repo
 import com.nunes.eduardo.paging.model.RepoSearchResult

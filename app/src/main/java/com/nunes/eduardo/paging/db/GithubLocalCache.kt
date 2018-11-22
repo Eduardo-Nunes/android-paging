@@ -1,6 +1,5 @@
 package com.nunes.eduardo.paging.db
 
-import android.arch.lifecycle.LiveData
 import android.arch.paging.DataSource
 import android.util.Log
 import com.nunes.eduardo.paging.model.Repo

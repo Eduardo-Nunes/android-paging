@@ -31,11 +31,6 @@ android {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
-    // Gradle automatically adds 'android.test.runner' as a dependency.
-    // see the docs https://developer.android.com/training/testing/set-up-project#junit-based-libs
-    useLibrary 'android.test.runner'
-    useLibrary 'android.test.base'
-    useLibrary 'android.test.mock'
 }
 
 dependencies {
@@ -59,28 +54,27 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
 
-//    // testing
-//    testImplementation "junit:junit:$junitVersion"
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$junitVersion"
 
-    // Core library
-    androidTestImplementation "androidx.test:core:$testingXCoreVersion"
-
-    // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation "androidx.test:runner:$runnerVersion"
-    androidTestImplementation "androidx.test:rules:$rulesVersion"
-
-    // Assertions
-    androidTestImplementation "androidx.test.ext:junit:$testingXCoreVersion"
-    androidTestImplementation "androidx.test.ext:truth:$testingXCoreVersion"
-    androidTestImplementation "com.google.truth:truth:$googleTruthVersion"
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation "com.android.support.test:runner:$runnerVersion"
+    androidTestImplementation "com.android.support.test:rules:$rulesVersion"
 
     // Espresso dependencies
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-accessibility:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-web:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-accessibility:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-web:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso.idling:idling-concurrent:$espressoVersion"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
+}
 
+/*
+Resolves dependency versions across test and production APKs, specifically, transitive
+dependencies. This is required since Espresso internally has a dependency on support-annotations.
+*/
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:$rootProject.ext.supportLibVersion"
 }
