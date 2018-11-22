@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.test.espresso.idling.CountingIdlingResource
 import com.nunes.eduardo.paging.Injection
 import com.nunes.eduardo.paging.R
 import com.nunes.eduardo.paging.model.Repo
@@ -22,7 +23,7 @@ class SearchRepositoriesActivity : AppCompatActivity() {
 
     private lateinit var viewModel: SearchRepositoriesViewModel
     private val adapter = ReposAdapter()
-//    private val idlingResource: CountingIdlingResource = CountingIdlingResource("search")
+    private val idlingResource: CountingIdlingResource = CountingIdlingResource("search")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +41,7 @@ class SearchRepositoriesActivity : AppCompatActivity() {
         initAdapter()
         val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
         viewModel.searchRepo(query)
-//        idlingResource.increment()
+        idlingResource.increment()
         initSearch(query)
     }
 
@@ -50,20 +51,19 @@ class SearchRepositoriesActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-//        list.layoutManager = LinearLayoutManager(this)
         list.adapter = adapter
         viewModel.repos.observe(this, Observer<PagedList<Repo>> { list ->
             list?.let {
                 Log.d("Activity", "list: ${it.size}")
                 showEmptyList(it.size == 0)
                 adapter.submitList(it)
-//                idlingResource.decrement()
+                if(idlingResource.isIdleNow) idlingResource.decrement()
             }
         })
         viewModel.networkErrors.observe(this, Observer<String> { message ->
             message?.let {
                 Toast.makeText(this, "\uD83D\uDE28 Wooops $it", Toast.LENGTH_LONG).show()
-//                idlingResource.decrement()
+                if(idlingResource.isIdleNow) idlingResource.decrement()
             }
         })
     }
@@ -95,7 +95,7 @@ class SearchRepositoriesActivity : AppCompatActivity() {
                 list.scrollToPosition(0)
                 viewModel.searchRepo(it.toString())
                 adapter.submitList(null)
-//                idlingResource.increment()
+                idlingResource.increment()
             }
         }
     }
