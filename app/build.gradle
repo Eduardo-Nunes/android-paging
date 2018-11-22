@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -45,6 +46,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "com.google.android.material:material:$materialDesignVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
+    implementation "androidx.multidex:multidex:$multidexVersion"
+    androidTestImplementation "androidx.multidex:multidex-instrumentation:$multidexVersion"
 
     // architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
