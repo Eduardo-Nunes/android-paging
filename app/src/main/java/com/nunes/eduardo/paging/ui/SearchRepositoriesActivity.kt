@@ -1,29 +1,28 @@
 package com.nunes.eduardo.paging.ui
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.arch.paging.PagedList
 import android.os.Bundle
-import android.support.test.espresso.idling.CountingIdlingResource
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nunes.eduardo.paging.Injection
 import com.nunes.eduardo.paging.R
 import com.nunes.eduardo.paging.model.Repo
-import kotlinx.android.synthetic.main.activity_search_repositories.list
-import kotlinx.android.synthetic.main.activity_search_repositories.search_repo
-import kotlinx.android.synthetic.main.activity_search_repositories.emptyList
+import kotlinx.android.synthetic.main.activity_search_repositories.*
+
 
 class SearchRepositoriesActivity : AppCompatActivity() {
 
     private lateinit var viewModel: SearchRepositoriesViewModel
     private val adapter = ReposAdapter()
-    private val idlingResource: CountingIdlingResource = CountingIdlingResource("search")
+//    private val idlingResource: CountingIdlingResource = CountingIdlingResource("search")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +40,7 @@ class SearchRepositoriesActivity : AppCompatActivity() {
         initAdapter()
         val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
         viewModel.searchRepo(query)
-        idlingResource.increment()
+//        idlingResource.increment()
         initSearch(query)
     }
 
@@ -51,19 +50,20 @@ class SearchRepositoriesActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
+//        list.layoutManager = LinearLayoutManager(this)
         list.adapter = adapter
         viewModel.repos.observe(this, Observer<PagedList<Repo>> { list ->
             list?.let {
                 Log.d("Activity", "list: ${it.size}")
                 showEmptyList(it.size == 0)
                 adapter.submitList(it)
-                idlingResource.decrement()
+//                idlingResource.decrement()
             }
         })
         viewModel.networkErrors.observe(this, Observer<String> { message ->
             message?.let {
                 Toast.makeText(this, "\uD83D\uDE28 Wooops $it", Toast.LENGTH_LONG).show()
-                idlingResource.decrement()
+//                idlingResource.decrement()
             }
         })
     }
@@ -95,7 +95,7 @@ class SearchRepositoriesActivity : AppCompatActivity() {
                 list.scrollToPosition(0)
                 viewModel.searchRepo(it.toString())
                 adapter.submitList(null)
-                idlingResource.increment()
+//                idlingResource.increment()
             }
         }
     }

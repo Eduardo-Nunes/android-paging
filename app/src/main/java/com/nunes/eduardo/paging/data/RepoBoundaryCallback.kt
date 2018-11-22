@@ -1,8 +1,8 @@
 package com.nunes.eduardo.paging.data
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PagedList
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagedList
 import com.nunes.eduardo.paging.api.GithubService
 import com.nunes.eduardo.paging.api.searchRepos
 import com.nunes.eduardo.paging.db.GithubLocalCache

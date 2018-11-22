@@ -1,10 +1,12 @@
 package com.nunes.eduardo.paging.data
 
-import android.arch.paging.LivePagedListBuilder
 import android.util.Log
+import androidx.paging.LivePagedListBuilder
 import com.nunes.eduardo.paging.api.GithubService
 import com.nunes.eduardo.paging.db.GithubLocalCache
 import com.nunes.eduardo.paging.model.RepoSearchResult
+import androidx.paging.PagedList
+
 
 /**
  * Repository class that works with local and remote data sources.

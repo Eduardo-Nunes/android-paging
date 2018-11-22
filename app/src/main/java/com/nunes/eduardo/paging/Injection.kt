@@ -1,7 +1,7 @@
 package com.nunes.eduardo.paging
 
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import androidx.lifecycle.ViewModelProvider
 import com.nunes.eduardo.paging.api.GithubService
 import com.nunes.eduardo.paging.data.GithubRepository
 import com.nunes.eduardo.paging.db.GithubLocalCache

@@ -1,7 +1,7 @@
 package com.nunes.eduardo.paging.db
 
-import android.arch.paging.DataSource
 import android.util.Log
+import androidx.paging.DataSource
 import com.nunes.eduardo.paging.model.Repo
 import java.util.concurrent.Executor
 

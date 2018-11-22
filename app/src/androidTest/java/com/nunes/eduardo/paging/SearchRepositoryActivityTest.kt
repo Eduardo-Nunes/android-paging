@@ -1,14 +1,6 @@
 package com.nunes.eduardo.paging
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.*
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.contrib.RecyclerViewActions
-import android.support.test.espresso.core.internal.deps.guava.base.Preconditions.checkArgument
-import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.filters.LargeTest
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+
 import android.view.KeyEvent
 import com.nunes.eduardo.paging.ui.RepoViewHolder
 import com.nunes.eduardo.paging.ui.SearchRepositoriesActivity
@@ -16,10 +8,18 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import android.support.v7.widget.RecyclerView
-import android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import android.text.TextUtils
 import android.view.View
+import androidx.core.util.Preconditions.checkArgument
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
+import androidx.test.rule.ActivityTestRule
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
